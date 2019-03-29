@@ -139,8 +139,8 @@ typedef DNSServiceRef ippeve_srv_t;	/* Service reference */
 typedef TXTRecordRef ippeve_txt_t;	/* TXT record */
 
 #elif defined(HAVE_AVAHI)
-typedef AvahiEntryGroup *_ipp_srv_t;	/* Service reference */
-typedef AvahiStringList *_ipp_txt_t;	/* TXT record */
+typedef AvahiEntryGroup *ippeve_srv_t;	/* Service reference */
+typedef AvahiStringList *ippeve_txt_t;	/* TXT record */
 
 #else
 typedef void *_ipp_srv_t;		/* Service reference */
@@ -5887,7 +5887,7 @@ register_printer(
   avahi_entry_group_add_service_strlst(printer->ipp_ref, AVAHI_IF_UNSPEC, AVAHI_PROTO_UNSPEC, 0, printer->dnssd_name, "_ipp._tcp", NULL, NULL, printer->port, ipp_txt);
   if (subtypes && *subtypes)
   {
-    snprintf(temp, sizeof(temp), "%s._sub._ipp._tcp", subtype);
+    snprintf(temp, sizeof(temp), "%s._sub._ipp._tcp", subtypes);
     avahi_entry_group_add_service_subtype(printer->ipp_ref, AVAHI_IF_UNSPEC, AVAHI_PROTO_UNSPEC, 0, printer->dnssd_name, "_ipp._tcp", NULL, temp);
   }
 
@@ -5899,7 +5899,7 @@ register_printer(
   avahi_entry_group_add_service_strlst(printer->ipp_ref, AVAHI_IF_UNSPEC, AVAHI_PROTO_UNSPEC, 0, printer->dnssd_name, "_ipps._tcp", NULL, NULL, printer->port, ipp_txt);
   if (subtypes && *subtypes)
   {
-    snprintf(temp, sizeof(temp), "%s._sub._ipps._tcp", subtype);
+    snprintf(temp, sizeof(temp), "%s._sub._ipps._tcp", subtypes);
     avahi_entry_group_add_service_subtype(printer->ipp_ref, AVAHI_IF_UNSPEC, AVAHI_PROTO_UNSPEC, 0, printer->dnssd_name, "_ipps._tcp", NULL, temp);
   }
 #endif /* HAVE_SSL */
